@@ -1,5 +1,6 @@
 package vn.edu.hust.employee.service;
 
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class EmployeeService {
         return savedEmployeeDto;
     }
 
-    //@Retry(name = "${spring.application.name}", fallbackMethod = "getDefaultDepartment")
+    @Retry(name = "${spring.application.name}", fallbackMethod = "getDefaultDepartment")
     public APIResponseDto getEmployeeById(Long employeeId) {
 
         LOGGER.info("inside getEmployeeById() method");
